@@ -18,6 +18,7 @@ class CreatePlansTable extends Migration
             $table->string('name');
             $table->float('price');
             $table->text('description')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

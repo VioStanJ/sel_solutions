@@ -15,3 +15,7 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::post('/login', [AuthController::class,'login']);
+
+Route::group(['middleware'=>'auth:api'],function () {
+    Route::apiResource('/plans',App\Http\Controllers\PlanController::class);
+});

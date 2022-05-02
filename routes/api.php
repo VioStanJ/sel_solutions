@@ -27,4 +27,7 @@ Route::group(['middleware'=>'auth:api'],function () {
     Route::apiResource('/schools',App\Http\Controllers\SchoolController::class);
     Route::post('schools/add',[App\Http\Controllers\SchoolController::class,'add']);
     Route::post('schools/remove',[App\Http\Controllers\SchoolController::class,'remove']);
+
+    Route::apiResource('/users',App\Http\Controllers\UserController::class);
+
 });

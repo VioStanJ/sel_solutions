@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('image')->default('/static/avatar.jpg');
             $table->date('birthday')->nullable();
             $table->string('role')->default('user');
+            $table->boolean('status')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

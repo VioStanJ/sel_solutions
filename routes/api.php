@@ -19,5 +19,6 @@ Route::post('/login', [AuthController::class,'login']);
 Route::group(['middleware'=>'auth:api'],function () {
 
     Route::apiResource('/plans',App\Http\Controllers\PlanController::class);
+    Route::apiResource('/specialisations',App\Http\Controllers\SpecialisationController::class);
 
 });

@@ -17,7 +17,7 @@ class CreateWorkerSchoolsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('school_id');
-            $table->string0('comments')->nullable();
+            $table->string('comments')->nullable();
             $table->date('from')->nullable();
             $table->date('to')->nullable();
             $table->timestamps();

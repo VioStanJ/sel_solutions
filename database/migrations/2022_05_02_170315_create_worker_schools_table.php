@@ -20,6 +20,7 @@ class CreateWorkerSchoolsTable extends Migration
             $table->string('comments')->nullable();
             $table->date('from')->nullable();
             $table->date('to')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Nurse extends Model
+class WorkerSchool extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id','school_id','comments','from','to'
+    ];
 }

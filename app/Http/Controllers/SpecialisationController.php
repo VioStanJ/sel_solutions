@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Specialisation;
+use App\Models\WorkerSpecialisation;
 
 class SpecialisationController extends Controller
 {
@@ -59,5 +60,30 @@ class SpecialisationController extends Controller
         $spec->save();
 
         return response()->json(['success'=>true,'message'=>'Deleted !'], 200);
+    }
+
+    public function add(Request $request)
+    {
+        $request->validate([
+            'user_id'=>'required|exists:users,id',
+            'specialisation_id'=>'required|exists:specialisations,id',
+        ]);
+
+        $spec = WorkerSpecialisation::create($request->only(['user_id','specialisation_id']));
+
+        return response()->json(['success'=>true,'message'=>'Added !'], 200);
+    }
+
+    public function remove(Request $request)
+    {
+        $request->validate([
+            'id'=>'required|exists:worker_specialisations,id'
+        ]);
+
+        $spec = WorkerSpecialisation::find($request->id);
+        $spec->status = 0;
+        $spec->save();
+
+        return response()->json(['success'=>true,'message'=>"Removed !"], 200);
     }
 }

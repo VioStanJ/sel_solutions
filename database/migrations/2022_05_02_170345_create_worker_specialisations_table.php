@@ -17,6 +17,7 @@ class CreateWorkerSpecialisationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('specialisation_id');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

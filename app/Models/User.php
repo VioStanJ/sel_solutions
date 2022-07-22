@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'lastname',
         'firstname',
+        'phone',
         'email',
         'password',
         'image',
@@ -46,4 +47,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function username()
+    {
+        $login = request()->input('username');
+
+        if(is_numeric($login)){
+            $field = 'phone';
+        } elseif (filter_var($login, FILTER_VALIDATE_EMAIL)) {
+            $field = 'email';
+        } else {
+            $field = 'username';
+        }
+
+        request()->merge([$field => $login]);
+
+        return $field;
+    }
 }

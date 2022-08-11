@@ -22,7 +22,7 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
                     </div>
-                    <a href="/profile" class="dropdown-item">
+                    <a href="{{route('admin.profile')}}" class="dropdown-item">
                         <i class="ni ni-single-02"></i>
                         <span>{{ __('My profile') }}</span>
                     </a>
@@ -80,15 +80,20 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.admin') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
+                        <i class="ni ni-tv-2 text-primary"></i> {{ __('DASHBOARD') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.plan') }}">
-                        <i class="ni ni-calendar-grid-58 text-primary"></i> {{ __('Plans') }}
+                    <a class="nav-link" href="{{ route('admin.plans.index') }}">
+                        <i class="ni ni-calendar-grid-58 text-primary"></i> {{ __('PLANS') }}
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.customers.index') }}">
+                        <i class="ni ni-calendar-grid-58 text-primary"></i> {{ __('CLIENTS') }}
+                    </a>
+                </li>
+                {{-- <li class="nav-item">
                     <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
                         <span class="nav-link-text" style="color: #f4645f;">{{ __('Laravel Examples') }}</span>
@@ -108,7 +113,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
 
             </ul>

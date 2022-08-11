@@ -10,12 +10,10 @@ Route::post('/admin/login',[App\Http\Controllers\Auth\LoginController::class,'lo
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
+    Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 
-    Route::prefix('plans')->group(function()
-    {
-        Route::get('/', [App\Http\Controllers\Admin\PlanController::class, 'index'])->name('plan');
-    });
-
+    Route::resource('plans', App\Http\Controllers\Admin\PlanController::class);
+    Route::resource('customers', App\Http\Controllers\Admin\CustomerController::class);
 
     Route::get('/icons',function() { return view('icons'); })->name('icons');
     Route::get('/tables',function() { return view('tables'); })->name('tables');

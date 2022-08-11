@@ -17,10 +17,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
     });
 
 
-    Route::get('/icons',function()
-    {
-        return view('icons');
-    });
+    Route::get('/icons',function() { return view('icons'); })->name('icons');
+    Route::get('/tables',function() { return view('tables'); })->name('tables');
 });
 
 Route::post('/logout',[App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');

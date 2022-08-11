@@ -123,6 +123,12 @@
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('Icons') }}
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/tables">
+                        <i class="ni ni-bullet-list-67 text-primary"></i> {{ __('Tables') }}
+                    </a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="https://argon-dashboard-laravel.creative-tim.com/docs/getting-started/overview.html">
                         <i class="ni ni-spaceship"></i> Getting started

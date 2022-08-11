@@ -12,6 +12,6 @@ class PlanController extends Controller
     {
         $plans = Plan::where('status','=',1)->get();
 
-        return view('plans.index');
+        return view('plans.index',compact(['plans']));
     }
 }

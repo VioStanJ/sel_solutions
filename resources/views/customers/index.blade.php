@@ -41,10 +41,10 @@
                 <table class="table align-items-center table-dark table-flush">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col" class="sort" data-sort="id">ID</th>
+                        <th scope="col" class="sort" data-sort="id"></th>
                         <th scope="col" class="sort" data-sort="name">NAME</th>
-                        <th scope="col" class="sort" data-sort="price">PRICE</th>
-                        <th scope="col">DESC</th>
+                        <th scope="col" class="sort" data-sort="phone">PHONE</th>
+                        <th scope="col">PLAN</th>
                         <th scope="col" class="sort" data-sort="status">STATUS</th>
                         <th scope="col"></th>
                     </tr>
@@ -52,11 +52,16 @@
                     <tbody class="list">
                         @foreach ($customers as $item)
                             <tr>
-                                <th scope="row">{{$item->id}}</th>
-                                <td class="name">{{$item->name}}</td>
-                                <td class="font-weight-bold">$ {{$item->price}}</td>
+                                <th scope="row">
+                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                                        <img alt="Image placeholder" src="{{$item->image}}">
+                                    </a>
+                                </th>
+                                <td class="name"><b>{{$item->lastname}}</b> {{$item->firstname}}</td>
+                                <td class="font-weight-bold">{{$item->phone}}</td>
                                 <td>
-                                    <small>{{$item->description}}</small>
+                                    PLAN :: <br>
+                                    <small>2022-09-23</small>
                                 </td>
                                 <td>
                                     @if ($item->status == 1)
@@ -66,7 +71,7 @@
                                     @endif
                                 </td>
                                 <td class="text-right">
-                                    {{-- <div class="dropdown">
+                                    <div class="dropdown">
                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-ellipsis-v"></i>
                                         </a>
@@ -75,7 +80,7 @@
                                         <a class="dropdown-item" href="#">Another action</a>
                                         <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

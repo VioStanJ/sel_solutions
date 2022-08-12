@@ -13,7 +13,11 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = [];
+        $role = Role::where('name','=','customer')->get()->first();
+
+        $roles = UserRole::where('role_id','=',$role->id)->get(['user_id']);
+
+        $customers = User::whereIn('id',$roles)->get();
 
         return view('customers.index',compact(['customers']));
     }

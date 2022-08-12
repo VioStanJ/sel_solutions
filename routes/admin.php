@@ -14,6 +14,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
 
     Route::resource('plans', App\Http\Controllers\Admin\PlanController::class);
     Route::resource('customers', App\Http\Controllers\Admin\CustomerController::class);
+    Route::get('/customers/manage/{id}',[App\Http\Controllers\Admin\CustomerController::class,'manage'])->name('customers.manage');
 
     Route::get('/icons',function() { return view('icons'); })->name('icons');
     Route::get('/tables',function() { return view('tables'); })->name('tables');

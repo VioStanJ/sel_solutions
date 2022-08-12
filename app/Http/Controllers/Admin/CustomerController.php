@@ -58,4 +58,19 @@ class CustomerController extends Controller
 
         return redirect(route('admin.customers.index'));
     }
+
+    public function show($id)
+    {
+        dd($id);
+    }
+
+    public function edit($id)
+    {
+        dd($id);
+    }
+
+    public function manage($id)
+    {
+        dd($id);
+    }
 }

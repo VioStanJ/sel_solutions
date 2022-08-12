@@ -53,7 +53,7 @@
                         @foreach ($customers as $item)
                             <tr>
                                 <th scope="row">
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                                    <a href="{{route('admin.customers.show',$item->id)}}" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="{{$item->firstname}}">
                                         <img alt="Image placeholder" src="{{$item->image}}">
                                     </a>
                                 </th>
@@ -73,12 +73,11 @@
                                 <td class="text-right">
                                     <div class="dropdown">
                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
+                                            <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
+                                            <a class="dropdown-item" href="{{route('admin.customers.manage',$item->id)}}">Details</a>
+                                            <a class="dropdown-item" href="{{route('admin.customers.edit',$item->id)}}">Modifier</a>
                                         </div>
                                     </div>
                                 </td>

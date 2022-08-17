@@ -14,4 +14,14 @@ class PlanController extends Controller
 
         return view('plans.index',compact(['plans']));
     }
+
+    public function saveCustomerPlan(Request $request)
+    {
+        # code...
+    }
+
+    public static function getUserPlan($id)
+    {
+
+    }
 }

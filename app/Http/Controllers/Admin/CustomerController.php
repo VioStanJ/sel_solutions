@@ -71,6 +71,12 @@ class CustomerController extends Controller
 
     public function manage($id)
     {
-        dd($id);
+        $customer = User::find($id);
+
+        if(empty($customer)){
+            return redirect()->back()->withErrors(['Client ontrouvable !']);
+        }
+
+        return view("customers.manage",compact('customer'));
     }
 }

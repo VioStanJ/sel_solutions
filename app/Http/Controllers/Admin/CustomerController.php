@@ -22,6 +22,10 @@ class CustomerController extends Controller
 
         $customers = User::whereIn('id',$roles)->get();
 
+        foreach ($customers as $key => $value) {
+            $value->client = ClientPlan::where('client_id','=',$value->id)->where('status','=',0)->get()->first();
+        }
+
         return view('customers.index',compact(['customers']));
     }
 

@@ -60,11 +60,11 @@
                                 <td class="name"><b>{{$item->lastname}}</b> {{$item->firstname}}</td>
                                 <td class="font-weight-bold">{{$item->phone}}</td>
                                 <td>
-                                    PLAN :: <br>
-                                    <small>2022-09-23</small>
+                                    {{empty($item->client)?'':$item->client->plan->name}} <br>
+                                    <small>{{empty($item->client)?'':$item->client->expiration_date}}</small>
                                 </td>
                                 <td>
-                                    @if ($item->status == 1)
+                                    @if (!empty($item->client))
                                         <span class="text-success">ACTIVE</span>
                                     @else
                                         <span class="text-danger">INACTIVE</span>

@@ -18,6 +18,7 @@ class CreateClientPlansTable extends Migration
             $table->unsignedBigInteger('plan_id');
             $table->unsignedBigInteger('client_id');
             $table->date('expiration_date');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

@@ -8,6 +8,9 @@ use App\Models\User;
 use App\Models\UserInformation;
 use App\Models\UserRole;
 use App\Models\Role;
+use App\Models\Plan;
+use App\Models\ClientPlan;
+use Carbon\Carbon;
 
 class CustomerController extends Controller
 {
@@ -77,6 +80,10 @@ class CustomerController extends Controller
             return redirect()->back()->withErrors(['Client ontrouvable !']);
         }
 
-        return view("customers.manage",compact('customer'));
+        $plans = Plan::where('status','=',1)->get();
+
+        $plan = ClientPlan::where('client_id','=',$customer->id)->where('status','=',1)->get()->last();
+
+        return view("customers.manage",compact('customer','plans','plan'));
     }
 }

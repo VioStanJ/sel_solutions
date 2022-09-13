@@ -13,6 +13,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
     Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 
     Route::resource('plans', App\Http\Controllers\Admin\PlanController::class);
+    Route::post('/plans/customer',[App\Http\Controllers\Admin\PlanController::class,'addCustomerPlan'])->name('add.customer.plan');
+
     Route::resource('customers', App\Http\Controllers\Admin\CustomerController::class);
     Route::get('/customers/manage/{id}',[App\Http\Controllers\Admin\CustomerController::class,'manage'])->name('customers.manage');
 

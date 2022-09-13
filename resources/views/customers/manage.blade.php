@@ -66,9 +66,9 @@ Getion Utilisateur - {{$customer->firstname}} {{$customer->lastname}}
                         <div class="row">
                             <div class="col">
                                 <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                                    <div>
+                                    {{-- <div>
                                         <span class="heading">22</span>
-                                        <span class="description">{{ __('Friends') }}</span>
+                                        <span class="description">{{ __('Month(s)') }}</span>
                                     </div>
                                     <div>
                                         <span class="heading">10</span>
@@ -77,26 +77,26 @@ Getion Utilisateur - {{$customer->firstname}} {{$customer->lastname}}
                                     <div>
                                         <span class="heading">89</span>
                                         <span class="description">{{ __('Comments') }}</span>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
                         <div class="text-center">
                             <h3>
-                                {{ $customer->firstname }}, {{ $customer->lastname }}<span class="font-weight-light">, 27</span>
+                                {{ $customer->firstname }}, {{ $customer->lastname }}<span class="font-weight-light"></span>
                             </h3>
                             <div class="h5 font-weight-300">
                                 <i class="ni location_pin mr-2"></i>{{ __('Bucharest, Romania') }}
                             </div>
                             <div class="h5 mt-4">
-                                <i class="ni business_briefcase-24 mr-2"></i>{{ __('Solution Manager - Creative Tim Officer') }}
+                                <i class="ni business_briefcase-24 mr-2"></i>{{ $customer->email }}
                             </div>
                             <div>
-                                <i class="ni education_hat mr-2"></i>{{ __('University of Computer Science') }}
+                                <i class="ni education_hat mr-2"></i>{{ $customer->phone }}
                             </div>
-                            <hr class="my-4" />
+                            {{-- <hr class="my-4" />
                             <p>{{ __('Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.') }}</p>
-                            <a href="#">{{ __('Show more') }}</a>
+                            <a href="#">{{ __('Show more') }}</a> --}}
                         </div>
                     </div>
                 </div>
@@ -112,8 +112,29 @@ Getion Utilisateur - {{$customer->firstname}} {{$customer->lastname}}
                     <div class="card-body">
 
                         <div class="card-plan">
-                            <h2>Pas de Plan !</h2>
+
+                            @if (empty($plan))
+                                <h2>Pas de Plan !</h2>
+                            @else
+                                <div class="flex align-items-center justify-content-center border mb-2 p-3">
+                                    <h1 class="text-success">{{$plan->plan->name}}</h1>
+                                    <h2>$ {{$plan->plan->price}}</h2>
+                                    <h4><i class="fas fa-calendar"></i> Date d'Expiration : {{$plan->expiration_date}}</h4>
+                                </div>
+                            @endif
                         </div>
+
+                        <div class="d-flex justify-content-center mt-3">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+
+                                @if (empty($plan))
+                                    Ajouter un Plan
+                                @else
+                                   Changer de Plan
+                                @endif
+                              </button>
+                        </div>
+
                         <form action="" method="post">
 
                         </form>
@@ -123,6 +144,41 @@ Getion Utilisateur - {{$customer->firstname}} {{$customer->lastname}}
                 </div>
             </div>
         </div>
+
+        {{-- Modal Plan--}}
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un Plan pour {{$customer->firstname.' '.$customer->lastname}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  @foreach ($plans as $item)
+                    <form action="{{route('admin.add.customer.plan')}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{$customer->id}}"/>
+                        <input type="hidden" name="plan_id" value="{{$item->id}}"/>
+
+                        <div class="flex border mb-2 p-3">
+                            <h1 class="text-success">{{$item->name}}</h1>
+                            <div class="row justify-content-around">
+                                <h2>$ {{$item->price}}</h2>
+
+                                <button class="btn btn-default">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                  @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
 
         {{-- @include('layouts.footers.auth') --}}
     </div>

@@ -22,6 +22,12 @@
         @yield('css')
     </head>
     <body class="{{ $class ?? '' }}">
+        <style>
+            .flex{
+                display: flex!important;
+                flex-direction: column!important;
+            }
+        </style>
         @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
@@ -45,7 +51,7 @@
                                             <img alt="Image placeholder" src="{{ asset('argon') }}/img/theme/team-4-800x800.jpg">
                                         </span>
                                         <div class="media-body ml-2 d-none d-lg-block">
-                                            <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
+                                            <span class="mb-0 text-sm  font-weight-bold">{{ !empty(auth()->user())?auth()->user()->name:'' }}</span>
                                         </div>
                                     </div>
                                 </a>

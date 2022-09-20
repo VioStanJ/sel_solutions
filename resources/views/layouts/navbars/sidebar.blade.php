@@ -90,7 +90,12 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.customers.index') }}">
-                        <i class="ni ni-calendar-grid-58 text-primary"></i> {{ __('CLIENTS') }}
+                        <i class="ni ni-circle-08 text-primary"></i> {{ __('CLIENTS') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.customers.index') }}">
+                        <i class="ni ni-badge text-primary"></i> {{ __('WORKERS') }}
                     </a>
                 </li>
                 {{-- <li class="nav-item">

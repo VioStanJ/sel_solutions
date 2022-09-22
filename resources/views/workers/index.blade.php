@@ -66,7 +66,7 @@
                                     @if ($item->blocked)
                                         <span class="text-warning">BLOCKED</span>
                                     @else
-                                        <span class="text-danger">ACTIVE</span>
+                                        <span class="text-success">ACTIVE</span>
                                     @endif
                                 </td>
                                 <td class="text-right">
@@ -75,8 +75,8 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="{{route('admin.customers.manage',$item->id)}}">Details</a>
-                                            <a class="dropdown-item" href="{{route('admin.customers.edit',$item->id)}}">Modifier</a>
+                                            <a class="dropdown-item" href="{{route('admin.workers.manage',$item->id)}}">Details</a>
+                                            <a class="dropdown-item" href="{{route('admin.workers.edit',$item->id)}}">Modifier</a>
                                         </div>
                                     </div>
                                 </td>

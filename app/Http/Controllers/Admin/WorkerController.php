@@ -16,6 +16,15 @@ use DB;
 
 class WorkerController extends Controller
 {
+
+    public function get(Request $request,$code)
+    {
+        $worker = Worker::where('code','=',$code)->get()->first();
+        $worker->user;
+
+        return response()->json(['worker'=>$worker], 200);
+    }
+
     public function index()
     {
         $workers = Worker::all();
@@ -94,5 +103,10 @@ class WorkerController extends Controller
         DB::commit();
 
         return redirect(route('admin.workers.index'));
+    }
+
+    public function manage(Request $reqeust,$id)
+    {
+        # code...
     }
 }

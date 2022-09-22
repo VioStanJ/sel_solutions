@@ -38,7 +38,7 @@ Créer un Travailleur
                     </div>
                     <div class="card-body">
 
-                        <form action="{{route('admin.customers.store')}}" method="POST">
+                        <form action="{{route('admin.workers.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <h6 class="heading-small text-muted mb-4">{{ __('Information Utilisateur') }}</h6>
@@ -164,7 +164,7 @@ Créer un Travailleur
                                 <div class="col-md-12">
                                     <div class="form-group{{ $errors->has('bio') ? ' has-danger' : '' }}">
                                         <label class="form-control-label text-white" for="input-name">{{ __('Biographie') }}</label>
-                                        <textarea type="text" name="bio" class="form-control form-control-alternative{{ $errors->has('bio') ? ' is-invalid' : '' }}" value="{{ old('bio') }}" required rows="5" id="bio"></textarea>
+                                        <textarea type="text" name="bio" class="form-control form-control-alternative{{ $errors->has('bio') ? ' is-invalid' : '' }}" value="{{ old('bio') }}" rows="5" id="bio"></textarea>
 
                                         @if ($errors->has('bio'))
                                             <span class="invalid-feedback" role="alert">

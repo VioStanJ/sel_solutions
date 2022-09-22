@@ -10,7 +10,7 @@ class Worker extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id','code','type',
+        'user_id','code','formation',
         'bio','photo','status','blocked'
     ];
 }

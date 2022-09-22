@@ -17,11 +17,11 @@ class CreateWorkersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('code')->unique();
-            $table->string('type');
+            $table->string('formation');
             $table->text('bio');
             $table->string('photo');
-            $table->boolean('status')->default(false);
-            $table->boolean('blocked')->default(false);
+            $table->boolean('status')->default(true);
+            $table->boolean('blocked')->default(true);
             $table->timestamps();
         });
     }

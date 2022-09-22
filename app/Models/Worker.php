@@ -13,4 +13,9 @@ class Worker extends Model
         'user_id','code','formation',
         'bio','photo','status','blocked'
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id');
+    }
 }

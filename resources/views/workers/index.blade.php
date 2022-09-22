@@ -44,7 +44,7 @@
                         <th scope="col" class="sort" data-sort="id"></th>
                         <th scope="col" class="sort" data-sort="name">NAME</th>
                         <th scope="col" class="sort" data-sort="phone">PHONE</th>
-                        <th scope="col">PLAN</th>
+                        <th scope="col">FORMATION</th>
                         <th scope="col" class="sort" data-sort="status">STATUS</th>
                         <th scope="col"></th>
                     </tr>
@@ -53,21 +53,20 @@
                         @foreach ($workers as $item)
                             <tr>
                                 <th scope="row">
-                                    <a href="{{route('admin.customers.show',$item->id)}}" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="{{$item->firstname}}">
-                                        <img alt="Image placeholder" src="{{$item->image}}">
+                                    <a href="{{route('admin.customers.show',$item->id)}}" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="{{$item->firstname}}">
+                                        <img alt="Image placeholder" src="{{$item->photo}}" >
                                     </a>
                                 </th>
-                                <td class="name"><b>{{$item->lastname}}</b> {{$item->firstname}}</td>
-                                <td class="font-weight-bold">{{$item->phone}}</td>
+                                <td class="name"><b>{{$item->user->lastname}}</b> {{$item->user->firstname}}</td>
+                                <td class="font-weight-bold">{{$item->user->phone}}</td>
                                 <td>
-                                    {{empty($item->client)?'':$item->client->plan->name}} <br>
-                                    <small>{{empty($item->client)?'':$item->client->expiration_date}}</small>
+                                    {{$item->formation}}
                                 </td>
                                 <td>
-                                    @if (!empty($item->client))
-                                        <span class="text-success">ACTIVE</span>
+                                    @if ($item->blocked)
+                                        <span class="text-warning">BLOCKED</span>
                                     @else
-                                        <span class="text-danger">INACTIVE</span>
+                                        <span class="text-danger">ACTIVE</span>
                                     @endif
                                 </td>
                                 <td class="text-right">

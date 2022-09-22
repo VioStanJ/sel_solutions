@@ -18,6 +18,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
     Route::resource('customers', App\Http\Controllers\Admin\CustomerController::class);
     Route::get('/customers/manage/{id}',[App\Http\Controllers\Admin\CustomerController::class,'manage'])->name('customers.manage');
 
+    Route::resource('workers', App\Http\Controllers\Admin\WorkerController::class);
+
     Route::get('/icons',function() { return view('icons'); })->name('icons');
     Route::get('/tables',function() { return view('tables'); })->name('tables');
 });

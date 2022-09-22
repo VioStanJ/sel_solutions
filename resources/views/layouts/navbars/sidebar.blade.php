@@ -94,7 +94,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.customers.index') }}">
+                    <a class="nav-link" href="{{ route('admin.workers.index') }}">
                         <i class="ni ni-badge text-primary"></i> {{ __('WORKERS') }}
                     </a>
                 </li>

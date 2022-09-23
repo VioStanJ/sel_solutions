@@ -72,6 +72,7 @@ class WorkerController extends Controller
         }
 
         UserInformation::create([
+            'user_id'=>$user->id,
             'card_name'=>$request->type,
             'card_id'=>$request->number
         ]);
@@ -150,5 +151,67 @@ class WorkerController extends Controller
         $worker->user;
 
         return view('workers.edit',compact('worker'));
+    }
+
+    public function update(Request $request,$id)
+    {
+        $request->validate([
+            'lastname'=>'required',
+            'firstname'=>'required',
+            'phone'=>'required|unique:users,id',
+            'number'=>'required',
+            'type'=>'required',
+            'formation'=>'required',
+            'bio'=>'required',
+        ]);
+
+        $worker = Worker::find($id);
+
+        if(empty($worker)){
+            return redirect()->back()->withErrors(['Worker not found !']);
+        }
+
+        // Update User
+        $user = User::find($worker->user_id);
+        $user->firstname = $request->firstname ;
+        $user->lastname = $request->lastname ;
+        $user->phone = $request->phone ;
+
+        if(!$user->save()){
+            return redirect()->back()->withErrors(['Fail on save Customer !']);
+        }
+
+        //Update Workder
+        $worker = Worker::where('user_id','=',$user->id)->get()->first();
+        $worker->formation = $request->formation ;
+        $worker->bio = $request->bio ;
+
+        if($request->hasFile('image')){
+            // If old image exisit, delete it for replace
+            if(file_exists(public_path($worker->photo))){
+                File::delete(public_path($worker->photo));
+            }
+
+            $store = '/storage/workers';
+            Utils::mkdir($store);// Create Directory for Image is directory not exist
+            $image = $request->file('image');
+            $img_name = 'IMG-'.time().'.'.$image->getClientOriginalExtension();
+            $desti = public_path($store);
+            $worker->photo = '/storage/workers/'.$img_name;
+
+            $image->move($desti,$img_name); // Save Image to directory
+        }
+
+        $worker->save();
+
+        // Update User Information
+        $info = UserInformation::where('user_id','=',$user->id)->get()->first();
+
+        $info->card_name = $request->type;
+        $info->card_id = $request->number;
+
+        $info->save();
+
+        return redirect(route('admin.workers.edit',$worker->id));
     }
 }

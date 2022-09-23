@@ -38,15 +38,16 @@ Modifier un Travailleur
                     </div>
                     <div class="card-body">
 
-                        <form action="{{route('admin.workers.store')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('admin.workers.update',$worker->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method("PUT")
 
                             <h6 class="heading-small text-muted mb-4">{{ __('Information Utilisateur') }}</h6>
 
                             <div class="row">
 
                                 <div class="col-md-4">
-                                    <img src="{{$worker->photo}}" style="width: 250px; height: auto; border-radius:12px;">
+                                    <img src="{{$worker->photo}}" style="width: 250px; height: 200px; object-fit: cover; border-radius:12px;">
                                 </div>
 
                                 <div class="col-md-8">
@@ -112,9 +113,9 @@ Modifier un Travailleur
 
                                         <select class="form-control form-control-alternative{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" id="type" required>
                                             <option value="">Sélectionnez une carte</option>
-                                            <option value="CIN">CIN</option>
-                                            <option value="NIF">NIF</option>
-                                            <option value="Passeport">Passeport</option>
+                                            <option value="CIN" <?php if($worker->information->card_name == "CIN"){ echo 'selected'; } ?>>CIN</option>
+                                            <option value="NIF" <?php if($worker->information->card_name == "NIF"){ echo 'selected'; } ?>>NIF</option>
+                                            <option value="Passeport" <?php if($worker->information->card_name == "Passeport"){ echo 'selected'; } ?>>Passeport</option>
                                         </select>
 
                                         @if ($errors->has('type'))
@@ -128,7 +129,7 @@ Modifier un Travailleur
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('number') ? ' has-danger' : '' }}">
                                         <label class="form-control-label text-white" for="input-name">{{ __('Numéro de Carte') }}</label>
-                                        <input type="text" name="number" id="input-name" class="form-control form-control-alternative{{ $errors->has('number') ? ' is-invalid' : '' }}" placeholder="{{ __('84834-53453') }}" value="{{ old('number') }}" required autofocus>
+                                        <input type="text" name="number" id="input-name" class="form-control form-control-alternative{{ $errors->has('number') ? ' is-invalid' : '' }}" placeholder="{{ __('84834-53453') }}" value="{{ old('number')??$worker->information->card_id }}" required autofocus>
 
                                         @if ($errors->has('number'))
                                             <span class="invalid-feedback" role="alert">
@@ -152,9 +153,9 @@ Modifier un Travailleur
 
                                         <select class="form-control form-control-alternative{{ $errors->has('formation') ? ' is-invalid' : '' }}" name="formation" id="formation" required>
                                             <option value="">Sélectionnez formation</option>
-                                            <option value="Médecin Généraliste">Médecin Généraliste</option>
-                                            <option value="Infirmier">Infirmier</option>
-                                            <option value="Aide Soignant">Aide Soignant</option>
+                                            <option value="Médecin Généraliste" <?php if($worker->formation == "Médecin Généraliste"){ echo "selected"; } ?>>Médecin Généraliste</option>
+                                            <option value="Infirmier" <?php if($worker->formation == "Infirmier"){ echo "selected"; } ?>>Infirmier</option>
+                                            <option value="Aide Soignant" <?php if($worker->formation == "Aide Soignant"){ echo "selected"; } ?>>Aide Soignant</option>
                                         </select>
 
                                         @if ($errors->has('formation'))

@@ -11,6 +11,7 @@ use App\Models\Role;
 use App\Models\Plan;
 use App\Models\ClientPlan;
 use Carbon\Carbon;
+use DB;
 
 class CustomerController extends Controller
 {
@@ -23,7 +24,7 @@ class CustomerController extends Controller
         $customers = User::whereIn('id',$roles)->get();
 
         foreach ($customers as $key => $value) {
-            $value->client = ClientPlan::where('client_id','=',$value->id)->where('status','=',0)->get()->first();
+            $value->client = ClientPlan::where('client_id','=',$value->id)->where('status','=',1)->get()->first();
         }
 
         return view('customers.index',compact(['customers']));
@@ -42,6 +43,8 @@ class CustomerController extends Controller
             'phone'=>'required|unique:users,id',
             'number'=>'required'
         ]);
+
+        DB::beginTransaction();
 
         $user = new User();
         $user->firstname = $request->firstname ;
@@ -63,6 +66,8 @@ class CustomerController extends Controller
             'user_id'=>$user->id,
             'role_id'=>Role::where('name','=','customer')->get()->first()->id
         ]);
+
+        DB::commit();
 
         return redirect(route('admin.customers.index'));
     }

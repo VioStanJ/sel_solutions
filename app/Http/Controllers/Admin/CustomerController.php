@@ -54,6 +54,7 @@ class CustomerController extends Controller
         }
 
         UserInformation::create([
+            'user_id'=>$user->id,
             'card_name'=>$request->type,
             'card_id'=>$request->number
         ]);

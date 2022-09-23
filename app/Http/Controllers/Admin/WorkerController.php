@@ -54,7 +54,6 @@ class WorkerController extends Controller
             'phone'=>'required|unique:users,id',
             'number'=>'required',
             'type'=>'required',
-            'number'=>'required',
             'formation'=>'required',
             'bio'=>'required',
             'image'=>'required|file',
@@ -140,8 +139,16 @@ class WorkerController extends Controller
         return redirect()->back();
     }
 
-    public function edit(Request $request)
+    public function edit(Request $request,$id)
     {
+        $worker = Worker::find($id);
 
+        if(empty($worker)){
+            return redirect()->back()->withErrors(['Worker not found !']);
+        }
+
+        $worker->user;
+
+        return view('workers.edit',compact('worker'));
     }
 }

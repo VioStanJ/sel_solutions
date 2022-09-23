@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Créer un Travailleur
+Modifier un Travailleur
 @endsection
 
 @section('content')
@@ -11,11 +11,11 @@ Créer un Travailleur
         <div class="header-body">
             <div class="row align-items-center py-4">
             <div class="col-lg-6 col-7">
-                <h6 class="h2 text-white d-inline-block mb-0">Créer un Travailleur</h6>
+                <h6 class="h2 text-white d-inline-block mb-0">Modifier un Travailleur</h6>
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                     <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Créer un Travailleur</li>
+                    <li class="breadcrumb-item">{{$worker->user->firstname.' '.$worker->user->lastname.' :: '.$worker->formation}}</li>
                 </ol>
                 </nav>
             </div>
@@ -45,10 +45,14 @@ Créer un Travailleur
 
                             <div class="row">
 
-                                <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <img src="{{$worker->photo}}" style="width: 250px; height: auto; border-radius:12px;">
+                                </div>
+
+                                <div class="col-md-8">
                                     <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
                                         <label class="form-control-label text-white" for="input-name">{{ __('Photo') }}</label>
-                                        <input type="file" name="image" id="input-name" class="form-control form-control-alternative{{ $errors->has('image') ? ' is-invalid' : '' }}" required autofocus>
+                                        <input type="file" name="image" id="input-name" class="form-control form-control-alternative{{ $errors->has('image') ? ' is-invalid' : '' }}" autofocus>
 
                                         @if ($errors->has('image'))
                                             <span class="invalid-feedback" role="alert">
@@ -61,7 +65,7 @@ Créer un Travailleur
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('lastname') ? ' has-danger' : '' }}">
                                         <label class="form-control-label text-white" for="input-name">{{ __('Nom') }}</label>
-                                        <input type="text" name="lastname" id="input-name" class="form-control form-control-alternative{{ $errors->has('lastname') ? ' is-invalid' : '' }}" placeholder="{{ __('Ex : Jhon') }}" value="{{ old('lastname')}}" required autofocus>
+                                        <input type="text" name="lastname" id="input-name" class="form-control form-control-alternative{{ $errors->has('lastname') ? ' is-invalid' : '' }}" placeholder="{{ __('Ex : Jhon') }}" value="{{ old('lastname')??$worker->user->lastname}}" required autofocus>
 
                                         @if ($errors->has('lastname'))
                                             <span class="invalid-feedback" role="alert">
@@ -74,7 +78,7 @@ Créer un Travailleur
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('firstname') ? ' has-danger' : '' }}">
                                         <label class="form-control-label text-white" for="input-name">{{ __('Prénom') }}</label>
-                                        <input type="text" name="firstname" id="input-name" class="form-control form-control-alternative{{ $errors->has('firstname') ? ' is-invalid' : '' }}" placeholder="{{ __('Ex : Doe') }}" value="{{ old('firstname') }}" required autofocus>
+                                        <input type="text" name="firstname" id="input-name" class="form-control form-control-alternative{{ $errors->has('firstname') ? ' is-invalid' : '' }}" placeholder="{{ __('Ex : Doe') }}" value="{{ old('firstname')??$worker->user->firstname }}" required autofocus>
 
                                         @if ($errors->has('firstname'))
                                             <span class="invalid-feedback" role="alert">
@@ -87,7 +91,7 @@ Créer un Travailleur
                                 <div class="col-md-12">
                                     <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
                                         <label class="form-control-label text-white" for="input-name">{{ __('Téléphone') }}</label>
-                                        <input type="text" name="phone" id="input-name" class="form-control form-control-alternative{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="{{ __('Ex: +509 5555 5555') }}" value="{{ old('phone') }}" required autofocus>
+                                        <input type="text" name="phone" id="input-name" class="form-control form-control-alternative{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="{{ __('Ex: +509 5555 5555') }}" value="{{ old('phone')??$worker->user->phone }}" required autofocus>
 
                                         @if ($errors->has('phone'))
                                             <span class="invalid-feedback" role="alert">
@@ -164,7 +168,7 @@ Créer un Travailleur
                                 <div class="col-md-12">
                                     <div class="form-group{{ $errors->has('bio') ? ' has-danger' : '' }}">
                                         <label class="form-control-label text-white" for="input-name">{{ __('Biographie') }}</label>
-                                        <textarea type="text" name="bio" class="form-control form-control-alternative{{ $errors->has('bio') ? ' is-invalid' : '' }}" value="{{ old('bio') }}" rows="5" id="bio"></textarea>
+                                        <textarea type="text" name="bio" class="form-control form-control-alternative{{ $errors->has('bio') ? ' is-invalid' : '' }}" value="{{ old('bio') }}" rows="5" id="bio">{{old('bio')??$worker->bio}}</textarea>
 
                                         @if ($errors->has('bio'))
                                             <span class="invalid-feedback" role="alert">

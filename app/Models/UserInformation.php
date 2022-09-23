@@ -9,5 +9,5 @@ class UserInformation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['card_id'];
+    protected $fillable = ['card_id','card_name','user_id'];
 }

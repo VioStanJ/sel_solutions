@@ -19,7 +19,16 @@ class WorkerController extends Controller
 
     public function get(Request $request,$code)
     {
-        $worker = Worker::where('code','=',$code)->get()->first();
+        $worker = Worker::where('code','=',$code)->where('status','=',1)->get()->first();
+
+        if(empty($worker)){
+            return response()->json(null, 403);
+        }
+
+        if($worker->blocked){
+            return response()->json(null, 401);
+        }
+
         $worker->user;
 
         return response()->json(['worker'=>$worker], 200);

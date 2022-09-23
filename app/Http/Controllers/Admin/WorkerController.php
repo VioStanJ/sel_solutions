@@ -114,8 +114,34 @@ class WorkerController extends Controller
         return redirect(route('admin.workers.index'));
     }
 
-    public function manage(Request $reqeust,$id)
+    public function manage(Request $request,$id)
     {
-        # code...
+        $worker = Worker::find($id);
+
+        if(empty($worker)){
+            return redirect()->back()->withErrors(['Worker not found !']);
+        }
+
+        $worker->user;
+
+        return view('workers.manage',compact(['worker']));
+    }
+
+    public function reactivation(Request $request,$id)
+    {
+        $worker = Worker::find($id);
+
+        if(empty($worker)){
+            return redirect()->back()->withErrors(['Worker not found !']);
+        }
+
+        $worker->blocked = !$worker->blocked;
+        $worker->save();
+        return redirect()->back();
+    }
+
+    public function edit(Request $request)
+    {
+
     }
 }

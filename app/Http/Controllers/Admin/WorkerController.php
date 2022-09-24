@@ -114,7 +114,7 @@ class WorkerController extends Controller
         return redirect(route('admin.workers.index'));
     }
 
-    public function manage(Request $request,$id)
+    public function show(Request $request,$id)
     {
         $worker = Worker::find($id);
 
@@ -213,5 +213,20 @@ class WorkerController extends Controller
         $info->save();
 
         return redirect(route('admin.workers.edit',$worker->id));
+    }
+
+    public function delete(Request $request,$id)
+    {
+        $worker = Worker::find($id);
+
+        if(empty($worker)){
+            return redirect()->back()->withErrors(['Worker not found !']);
+        }
+
+        $worker->status = 0;
+        $worker->blocked = 0;
+        $worker->save();
+
+        return redirect(route('admin.workers.index'));
     }
 }

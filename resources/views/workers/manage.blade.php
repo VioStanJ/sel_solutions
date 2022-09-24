@@ -95,23 +95,29 @@ Getion Utilisateur - {{$worker->user->firstname}} {{$worker->user->lastname}}
                                 <div id="qr-code"></div>
                             </div>
                             <hr class="my-4" />
-                            <div class="row justify-content-between align-items-center">
-                                <h4>
-                                    <span class="text-secondaey">STATUS :: </span>
-                                    @if ($worker->blocked)
-                                        BLOCKER
-                                    @else
-                                        ACTIVER
-                                    @endif
-                                </h4>
-                                <a href="{{route('admin.workers.reactivation',$worker->id)}}" class="btn btn-warning text-uppercase">
-                                    @if ($worker->blocked)
-                                        RE-ACTIVER
-                                    @else
-                                        BLOQUER
-                                    @endif
-                                </a>
-                            </div>
+                            @if ($worker->status)
+                                <div class="row justify-content-between align-items-center">
+                                    <h4>
+                                        <span class="text-secondaey">STATUS :: </span>
+                                        @if ($worker->blocked)
+                                            BLOCKER
+                                        @else
+                                            ACTIVER
+                                        @endif
+                                    </h4>
+                                    <a href="{{route('admin.workers.reactivation',$worker->id)}}" class="btn btn-warning text-uppercase">
+                                        @if ($worker->blocked)
+                                            RE-ACTIVER
+                                        @else
+                                            BLOQUER
+                                        @endif
+                                    </a>
+                                </div>
+
+                                <div class="row justify-content-between align-items-center">
+                                    <a href="{{route('admin.workers.delete',$worker->id)}}" class="btn btn-danger">EFFACER</a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

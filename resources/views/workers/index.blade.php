@@ -63,22 +63,30 @@
                                     {{$item->formation}}
                                 </td>
                                 <td>
-                                    @if ($item->blocked)
-                                        <span class="text-warning">BLOCKED</span>
+                                    @if (!$item->status)
+                                        <span class="text-warning">DELETED</span>
                                     @else
-                                        <span class="text-success">ACTIVE</span>
+                                        @if ($item->blocked)
+                                            <span class="text-warning">BLOCKED</span>
+                                        @else
+                                            <span class="text-success">ACTIVE</span>
+                                        @endif
                                     @endif
                                 </td>
                                 <td class="text-right">
-                                    <div class="dropdown">
-                                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="{{route('admin.workers.manage',$item->id)}}">Details</a>
-                                            <a class="dropdown-item" href="{{route('admin.workers.edit',$item->id)}}">Modifier</a>
+                                    @if (!$item->status)
+                                        <span class="text-warning">DELETED</span>
+                                    @else
+                                        <div class="dropdown">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                <a class="dropdown-item" href="{{route('admin.workers.manage',$item->id)}}">Details</a>
+                                                <a class="dropdown-item" href="{{route('admin.workers.edit',$item->id)}}">Modifier</a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

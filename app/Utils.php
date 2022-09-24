@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\UserRole;
 
 class Utils
 {
@@ -54,5 +56,17 @@ class Utils
         }
 
     	return $result;
+    }
+
+    public static function getRoles(User $user)
+    {
+        $roles = UserRole::where('user_id','=',$user->id)->get();
+
+        $all = array();
+
+        foreach ($roles as $key => $value) {
+            array_push($all,$value->role);
+        }
+        return $all;
     }
 }

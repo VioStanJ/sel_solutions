@@ -60,6 +60,44 @@ class AuthController extends Controller
         event(new SMSEvent($user->phone,$msj));
 
         return response()->json(['success'=>true,'otp'=>$otp,'expired_at'=>$expiration], 200);
+    }
+
+    public function verifyLogin(Request $request)
+    {
+        $request->validate([
+            'phone'=>'required|exists:users,phone',
+            'otp'=>'required'
+        ]);
+
+        $rec = OtpReceiver::where('phone','=',$request->phone)->get()->last();
+
+        if(empty($rec)){
+            return response()->json(['success'=>false,'message'=>'OTP kod la ekspire ou pa bon !'], 200);
+        }
+
+        $d1 = Carbon::parse($rec->expired_at);
+        $d2 = Carbon::now();
+
+        if(!$d1->gt($d2)){
+            return response()->json(['success'=>false,'message'=>'OTP kod la ekspire ou pa bon !'], 200);
+        }
+
+        if($rec->otp != $request->otp){
+            return response()->json(['success'=>false,'message'=>'OTP kod la ekspire ou pa bon !'], 200);
+        }
+
+        $user = User::where('phone','=',$request->phone)->where('status','=',1)->get()->first();
+
+        if(empty($user)){
+            return response()->json(['success'=>false,'message'=>'Kont ou an bloke, Kontakte SEL Solutions !'], 200);
+        }
+
+        $roles = Utils::getRoles($user);
+
+        $token = $user->createToken('api')->accessToken;
+
+        return response()->json(['success'=>true,'token'=>$token,'user'=>$user,'roles'=>$roles], 200);
 
     }
 }
+

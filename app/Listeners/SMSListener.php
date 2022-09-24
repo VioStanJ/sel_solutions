@@ -50,7 +50,7 @@ class SMSListener
         "&message=".urlencode($event->msj)."&url=".$url."&PWD=".$PWD;
             $ur='https://toksms.com/dashboard1/API/api.toksms.php?';
 
-        // echo $data1=$ur.''.$data;
+        $data1=$ur.''.$data;
 
         // Envoie de la requête GET avec cURL
         $ch = curl_init();

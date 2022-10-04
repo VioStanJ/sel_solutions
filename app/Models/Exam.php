@@ -10,6 +10,6 @@ class Exam extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name','non','normal_from','normal_to','created_by','status'
+        'name','non','normal_from','normal_to','created_by','status','active'
     ];
 }

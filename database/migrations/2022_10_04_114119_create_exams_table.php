@@ -18,9 +18,11 @@ class CreateExamsTable extends Migration
             $table->string('name');
             $table->string('non');
             $table->float('normal_from');
-            $table->float('normal_to');
+            $table->float('normal_to')->nullable();
+            $table->string('val');
             $table->unsignedBigInteger('created_by');
-            $table->boolean('status')->default(false);
+            $table->boolean('active')->default(false);
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

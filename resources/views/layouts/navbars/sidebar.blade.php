@@ -98,6 +98,12 @@
                         <i class="ni ni-badge text-primary"></i> {{ __('WORKERS') }}
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.exams.index') }}">
+                        <i class="ni ni-single-copy-04 text-primary"></i> {{ __('EXAMENS') }}
+                    </a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>

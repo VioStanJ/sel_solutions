@@ -24,6 +24,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
     Route::get('/workers/reactivation/{id}', [App\Http\Controllers\Admin\WorkerController::class,'reactivation'])->name('workers.reactivation');
     Route::get('/workers/delete/{id}', [App\Http\Controllers\Admin\WorkerController::class,'delete'])->name('workers.delete');
 
+    Route::resource('exams', App\Http\Controllers\Admin\ExamController::class);
+
     Route::get('/icons',function() { return view('icons'); })->name('icons');
     Route::get('/tables',function() { return view('tables'); })->name('tables');
 });

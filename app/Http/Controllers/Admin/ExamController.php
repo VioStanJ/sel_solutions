@@ -46,4 +46,39 @@ class ExamController extends Controller
 
         return redirect(route('admin.exams.index'));
     }
+
+    public function edit(Request $request,$id)
+    {
+        $exam = Exam::find($id);
+
+        return view('exams.edit',compact('exam'));
+    }
+
+    public function update(Request $request,$exam)
+    {
+        $exam = Exam::find($exam);
+
+        if(empty($exam)){
+            return redirect()->back()->withErrors(['Examen non trouvé !']);
+        }
+
+        $exam->name = $request->name ;
+        $exam->non = $request->non ;
+        $exam->normal_from = $request->from ;
+        $exam->normal_to = $request->to ;
+        $exam->active = $request->active ;
+        $exam->created_by = $request->user()->id ;
+        $exam->val = $request->val;
+
+        if(!$exam->save()){
+            return redirect()->back()->withErrors(['Enregistrement echoué !']);
+        }
+
+        return redirect(route('admin.exams.index'));
+    }
+
+    public function show($id)
+    {
+        # code...
+    }
 }

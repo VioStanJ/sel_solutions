@@ -21,7 +21,7 @@ Route::post('/verify/otp',[AuthController::class,'verifyLogin']);
 
 Route::group(['middleware'=>'auth:api'],function () {
 
-    // Route::apiResource('/plans',App\Http\Controllers\PlanController::class);
     Route::get('/customer/search/{q}',[App\Http\Controllers\Api\CustomerController::class,'search']);
 
+    Route::post('/worker/review',[App\Http\Controllers\Api\WorkerController::class,'addReview']);
 });

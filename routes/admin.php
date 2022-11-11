@@ -10,6 +10,11 @@ Route::get('/scan/worker/{code}',[App\Http\Controllers\Admin\WorkerController::c
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
 
+    //Territory
+    ROute::get('/get/departement',[App\Http\Controllers\TerritoryController::class,'getDepartement']);
+    ROute::get('/get/arrondissement/{departement}',[App\Http\Controllers\TerritoryController::class,'getArrondissementByDepartement']);
+    ROute::get('/get/commune/{arrondissement}',[App\Http\Controllers\TerritoryController::class,'getCommuneByArrondissement']);
+
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
     Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 

@@ -94,6 +94,16 @@ Getion Utilisateur - {{$customer->firstname}} {{$customer->lastname}}
                             <div>
                                 <i class="ni education_hat mr-2"></i>{{ $customer->phone }}
                             </div>
+
+                            @if (!empty($adresse))
+                                <div>
+                                    <i class="ni education_hat mr-2"></i>{{ $adresse->adresse.','.$adresse->commune.' '.$adresse->arrondissement.' '.$adresse->departement }}
+                                </div>
+                            @endif
+
+                            <div class="mt-4">
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAdressModal">{{!empty($adress)?"Ajouter":"Modifier"}} Adresse</button>
+                            </div>
                             {{-- <hr class="my-4" />
                             <p>{{ __('Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.') }}</p>
                             <a href="#">{{ __('Show more') }}</a> --}}
@@ -180,6 +190,133 @@ Getion Utilisateur - {{$customer->firstname}} {{$customer->lastname}}
             </div>
           </div>
 
+        {{-- END Modal Plan --}}
+
+        {{-- Modal Adress --}}
+        <div class="modal fade" id="addAdressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Ajouter l'Adresse du Client {{$customer->firstname.' '.$customer->lastname}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('admin.customers.add.adress')}}" method="post">
+                        @csrf
+                        <input type="hidden" name="customer" value="{{$customer->id}}">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label text-black" for="input-name">{{ __('Departement') }}</label>
+
+                                    <select class="form-control form-control-alternative{{ $errors->has('type') ? ' is-invalid' : '' }}" name="departement" id="departement" required>
+                                        <option value="">Sélectionnez un departement</option>
+                                        @foreach ($deps as $item)
+                                            <option value="{{$item->id}}">{{$item->nom}}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('type'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('type') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label text-black" for="input-name">{{ __('Arrondissement') }}</label>
+
+                                    <select class="form-control form-control-alternative{{ $errors->has('type') ? ' is-invalid' : '' }}" name="arrondissement" id="arrondissement" required>
+                                        <option value="">Sélectionnez un arrondissement</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label text-black" for="input-name">{{ __('commune') }}</label>
+
+                                    <select class="form-control form-control-alternative{{ $errors->has('type') ? ' is-invalid' : '' }}" name="commune" id="commune" required>
+                                        <option value="">Sélectionnez une commune</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group{{ $errors->has('adress') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label text-black" for="input-name">{{ __('Adress') }}</label>
+                                    <input type="text" name="adress" id="input-name" class="form-control form-control-alternative{{ $errors->has('adress') ? ' is-invalid' : '' }}" placeholder="{{ __('Ex : 15, Rue Dessalines') }}" value="{{ old('adress')}}" required autofocus>
+
+                                    @if ($errors->has('adress'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('adress') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mt-5 mb-5 d-flex justify-content-center align-items-center">
+                                <button class="btn btn-primary">Sauvegarder</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+        </div>
+        {{-- END Modal Adress --}}
         {{-- @include('layouts.footers.auth') --}}
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function(){
+            // Get Arrondisement
+            $('#departement').on('change',function(){
+                let id = this.value;
+
+                $.ajax({
+                    url:"/admin/get/arrondissement/"+this.value,
+                    type:'get',
+                    success:function(data){
+                        $('#arrondissement').empty();
+                        $('#commune').empty();
+                        $('#arrondissement').append(`<option value="">Sélectionnez un arrondissement</option>`);
+                        $('#commune').append(`<option value="">Sélectionnez une commune</option>`);
+
+                        data.arrondissements.forEach(element => {
+                            $('#arrondissement').append(`<option value="${element.id}">${element.nom}</option>`);
+                        });
+                    }
+                })
+            });
+
+            //Get commune
+            $('#arrondissement').on('change',function(){
+                let id = this.value;
+
+                $.ajax({
+                    url:"/admin/get/commune/"+this.value,
+                    type:'get',
+                    success:function(data){
+                        $('#commune').empty();
+                        $('#commune').append(`<option value="">Sélectionnez une commune</option>`);
+
+                        data.communes.forEach(element => {
+                            $('#commune').append(`<option value="${element.id}">${element.nom}</option>`);
+                        });
+                    }
+                })
+            });
+        });
+    </script>
 @endsection

@@ -11,9 +11,9 @@ Route::get('/scan/worker/{code}',[App\Http\Controllers\Admin\WorkerController::c
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
 
     //Territory
-    ROute::get('/get/departement',[App\Http\Controllers\TerritoryController::class,'getDepartement']);
-    ROute::get('/get/arrondissement/{departement}',[App\Http\Controllers\TerritoryController::class,'getArrondissementByDepartement']);
-    ROute::get('/get/commune/{arrondissement}',[App\Http\Controllers\TerritoryController::class,'getCommuneByArrondissement']);
+    ROute::get('/get/departement',[App\Http\Controllers\TerritoryController::class,'getDepartement'])->name('get.departement');
+    ROute::get('/get/arrondissement/{departement}',[App\Http\Controllers\TerritoryController::class,'getArrondissementByDepartement'])->name('get.arrondissement');
+    ROute::get('/get/commune/{arrondissement}',[App\Http\Controllers\TerritoryController::class,'getCommuneByArrondissement'])->name('get.communes');
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
     Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
@@ -23,6 +23,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
 
     Route::resource('customers', App\Http\Controllers\Admin\CustomerController::class);
     Route::get('/customers/manage/{id}',[App\Http\Controllers\Admin\CustomerController::class,'manage'])->name('customers.manage');
+    Route::post('/customers/add/adress',[App\Http\Controllers\Admin\CustomerController::class,'addAdress'])->name('customers.add.adress');
 
     Route::resource('workers', App\Http\Controllers\Admin\WorkerController::class);
     Route::get('/workers/manage/{id}', [App\Http\Controllers\Admin\WorkerController::class,'show'])->name('workers.manage');

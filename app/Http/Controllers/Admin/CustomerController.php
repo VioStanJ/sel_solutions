@@ -12,6 +12,8 @@ use App\Models\Plan;
 use App\Models\ClientPlan;
 use Carbon\Carbon;
 use DB;
+use App\Models\Departement;
+use App\Models\CustomerAdress;
 
 class CustomerController extends Controller
 {
@@ -94,6 +96,33 @@ class CustomerController extends Controller
 
         $plan = ClientPlan::where('client_id','=',$customer->id)->where('status','=',1)->get()->last();
 
-        return view("customers.manage",compact('customer','plans','plan'));
+        $deps = Departement::all();
+
+        $adresse = CustomerAdress::where('customer_id','=',$customer->id)->where('status','=',1)->get()->last();
+
+        return view("customers.manage",compact('customer','plans','plan','deps','adresse'));
+    }
+
+    public function addAdress(Request $request)
+    {
+        $request->validate([
+            'customer'=>'required',
+            'departement'=>'required',
+            'arrondissement'=>'required',
+            'commune'=>'required',
+            'adress'=>'required',
+        ]);
+
+        CustomerAdress::where('customer_id','=',$request->customer)->update(['status'=>false]);
+
+        CustomerAdress::create([
+            'customer_id'=>$request->customer,
+            'departement'=>$request->departement,
+            'arrondissement'=>$request->arrondissement,
+            'commune'=>$request->commune,
+            'adresse'=>$request->adress,
+        ]);
+
+        return redirect()->back();
     }
 }

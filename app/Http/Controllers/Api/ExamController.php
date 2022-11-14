@@ -59,4 +59,19 @@ class ExamController extends Controller
         DB::commit();
         return response()->json(['success'=>true,'message'=>'Merci !'], 200);
     }
+
+    public function getConsults(Request $request)
+    {
+        $cons = Consultation::where('customer_id','=',$request->user()->id)->where('status','=',1)->orderBy('created_at','desc')->get();
+
+        foreach ($cons as $key => $value) {
+            // Get
+            $results = $value->results;
+
+            foreach ($results as $key => $val) {
+                $val->exam;
+            }
+        }
+        return response()->json(['success'=>true,'consultations'=>$cons], 200);
+    }
 }

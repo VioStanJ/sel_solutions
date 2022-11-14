@@ -12,4 +12,9 @@ class Consultation extends Model
     protected $fillable = [
         'customer_id','worker_id','note','status'
     ];
+
+    public function results()
+    {
+        return $this->hasMany(ConsultationResult::class, 'consultation_id', 'id');
+    }
 }

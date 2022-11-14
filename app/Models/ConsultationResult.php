@@ -12,4 +12,9 @@ class ConsultationResult extends Model
     protected $fillable = [
         'consultation_id','exam_id','result'
     ];
+
+    public function exam()
+    {
+        return $this->hasOne(Exam::class, 'id', 'exam_id');
+    }
 }

@@ -99,5 +99,14 @@ class AuthController extends Controller
         return response()->json(['success'=>true,'token'=>$token,'user'=>$user,'roles'=>$roles], 200);
 
     }
+
+    public function profile(Request $request)
+    {
+        $user = $request->user();
+
+        $user->roles = Utils::getRoles($user);
+
+        return response()->json(['success'=>true,'user'=>$user], 200);
+    }
 }
 

@@ -24,4 +24,7 @@ Route::group(['middleware'=>'auth:api'],function () {
     Route::get('/customer/search/{q}',[App\Http\Controllers\Api\CustomerController::class,'search']);
 
     Route::post('/worker/review',[App\Http\Controllers\Api\WorkerController::class,'addReview']);
+
+    Route::get('/exam/get',[App\Http\Controllers\Api\ExamController::class,'get']);
+    Route::post('/exam/submit',[App\Http\Controllers\Api\ExamController::class,'save']);
 });

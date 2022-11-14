@@ -54,7 +54,7 @@
                             <tr>
                                 <th scope="row">{{$item->id}}</th>
                                 <td class="name">{{$item->name}}</td>
-                                <td class="font-weight-bold">$ {{$item->non}}</td>
+                                <td class="font-weight-bold">{{$item->non}}</td>
                                 <td>
                                     <small>{{$item->normal_from.' - '.$item->normal_to.' '.$item->val}}</small>
                                 </td>

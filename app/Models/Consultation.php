@@ -17,4 +17,14 @@ class Consultation extends Model
     {
         return $this->hasMany(ConsultationResult::class, 'consultation_id', 'id');
     }
+
+    /**
+     * Get the worker associated with the Consultation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function worker()
+    {
+        return $this->hasOne(User::class, 'id', 'worker_id');
+    }
 }

@@ -67,6 +67,7 @@ class ExamController extends Controller
         foreach ($cons as $key => $value) {
             // Get
             $results = $value->results;
+            $value->worker;
 
             foreach ($results as $key => $val) {
                 $val->exam;

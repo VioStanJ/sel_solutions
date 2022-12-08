@@ -21,6 +21,8 @@ Route::post('/verify/otp',[AuthController::class,'verifyLogin']);
 
 Route::group(['middleware'=>'auth:api'],function () {
 
+    Route::post('/logout',[AuthController::class,'logout']);
+
     Route::get('/profile',[App\Http\Controllers\AuthController::class,'profile']);
 
     Route::get('/customer/search/{q}',[App\Http\Controllers\Api\CustomerController::class,'search']);

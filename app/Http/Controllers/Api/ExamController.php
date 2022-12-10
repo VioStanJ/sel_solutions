@@ -13,7 +13,7 @@ class ExamController extends Controller
 {
     public function get(Request $request)
     {
-        $exams = Exam::where('status','=',1)->get();
+        $exams = Exam::where('active','=',1)->where('status','=',1)->get();
 
         return response()->json(['success'=>true,'exams'=>$exams], 200);
     }

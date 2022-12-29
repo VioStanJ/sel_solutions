@@ -7,9 +7,8 @@
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>SEL :: @yield("title",'Solutions')</title>
+        <title>+ Vi :: @yield("title",'Solutions')</title>
         <!-- Favicon -->
-        <link href="{{ asset('argon') }}/img/brand/favicon.png" rel="icon" type="image/png">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
         <!-- Extra details for Live View on GitHub Pages -->
@@ -41,7 +40,7 @@
                 <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
                     <div class="container-fluid">
                         <!-- Brand -->
-                        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="#">SEL :: @yield("title",'Solutions')</a>
+                        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="#">+ Vi :: @yield("title",'Solutions')</a>
 
                         <ul class="navbar-nav align-items-center d-none d-md-flex">
                             <li class="nav-item dropdown">

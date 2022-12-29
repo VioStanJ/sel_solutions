@@ -1,0 +1,9 @@
+#section_login{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background: lightgray!important;
+    flex-direction: column;
+    justify-content: center!important;
+    align-items: center!important;
+}

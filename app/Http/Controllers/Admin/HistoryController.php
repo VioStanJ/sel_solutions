@@ -43,6 +43,26 @@ class HistoryController extends Controller
 
     public function createQuestion(Request $request)
     {
-        # code...
+        $request->validate([
+            'form_id'=>'required|exists:patient_forms,id',
+            "title"=>'required',
+            "type"=>"required",
+            "option"=>""
+        ]);
+
+        if($request->type == QuestionHistory::CUSTOM){
+            $request->validate([
+                'option'=>'required'
+            ]);
+        }
+
+        QuestionHistory::create([
+            'form_id'=>$request->form_id,
+            'title'=>$request->title,
+            'type'=>$request->type,
+            'option'=>$request->option
+        ]);
+
+        return redirect()->back();
     }
 }

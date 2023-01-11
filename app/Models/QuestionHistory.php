@@ -18,7 +18,7 @@ class QuestionHistory extends Model
     public const CUSTOM = 6;
 
     protected $fillable = [
-        "history_id","title","type",
+        "form_id","title","type",
         "option","status"
     ];
 }

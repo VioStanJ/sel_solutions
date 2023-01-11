@@ -134,7 +134,7 @@ Getion Utilisateur - {{$worker->user->firstname}} {{$worker->user->lastname}}
 
                         <div class="card-plan">
 
-                            @if (empty($plan))
+                            {{-- @if (empty($plan))
                                 <h2>Pas de Plan !</h2>
                             @else
                                 <div class="flex align-items-center justify-content-center border mb-2 p-3">
@@ -142,18 +142,18 @@ Getion Utilisateur - {{$worker->user->firstname}} {{$worker->user->lastname}}
                                     <h2>$ {{$plan->plan->price}}</h2>
                                     <h4><i class="fas fa-calendar"></i> Date d'Expiration : {{$plan->expiration_date}}</h4>
                                 </div>
-                            @endif
+                            @endif --}}
                         </div>
 
                         <div class="d-flex justify-content-center mt-3">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                            {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
 
                                 @if (empty($plan))
                                     Ajouter un Plan
                                 @else
                                    Changer de Plan
                                 @endif
-                              </button>
+                              </button> --}}
                         </div>
 
                         <form action="" method="post">
@@ -168,7 +168,7 @@ Getion Utilisateur - {{$worker->user->firstname}} {{$worker->user->lastname}}
 
         {{-- Modal Plan--}}
 
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        {{-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -200,7 +200,7 @@ Getion Utilisateur - {{$worker->user->firstname}} {{$worker->user->lastname}}
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
 
         {{-- @include('layouts.footers.auth') --}}
     </div>

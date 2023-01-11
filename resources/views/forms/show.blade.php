@@ -50,9 +50,37 @@ Form :: {{$form->title}}
                     </thead>
                     <tbody class="list">
                         @foreach ($questions as $item)
-                            {{-- <tr>
+                            <tr>
                                 <td class="name">{{$item->title}}</td>
-                                <td class="font-weight-bold"><small>{{$item->description}}</small></td>
+                                <td class="font-weight-bold">
+                                    @switch($item->type)
+                                        @case(0)
+                                        TEXTE
+                                            @break
+                                        @case(1)
+                                        DATE
+                                            @break
+                                        @case(2)
+                                        NUMERO
+                                            @break
+                                        @case(3)
+                                        OUI/NO
+                                            @break
+                                        @case(4)
+                                        EMAIL
+                                            @break
+                                        @case(5)
+                                        CAS PAR CAS
+                                            @break
+                                        @case(6)
+                                            CUSTOM
+                                            @break
+                                        @default
+                                            TEXTE
+                                            @break
+                                    @endswitch
+                                </td>
+                                <td>{{$item->option??"--"}}</td>
                                 <td>
                                     @if ($item->status == 1)
                                         <span class="text-success">ACTIVE</span>
@@ -70,7 +98,7 @@ Form :: {{$form->title}}
                                         </div>
                                     </div>
                                 </td>
-                            </tr> --}}
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -91,6 +119,7 @@ Form :: {{$form->title}}
             </div>
             <div class="modal-body">
                 <form action="{{route('admin.forms.createQuestion')}}" method="post">
+                    @csrf
                     <div class="row">
                         <input type="hidden" name="form_id" value="{{$form->id}}"/>
 
@@ -110,7 +139,6 @@ Form :: {{$form->title}}
                         <div class="col-md-12">
                             <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="input-name">{{ __('Type de Question') }}</label>
-
                                 <select class="form-control form-control-alternative{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" id="type" required>
                                     <option value="">Sélectionnez un</option>
                                     <option value="0">TEXTE</option>
@@ -118,7 +146,7 @@ Form :: {{$form->title}}
                                     <option value="2">NUMERO</option>
                                     <option value="3">OUI/NO</option>
                                     <option value="4">EMAIL</option>
-                                    <option value="5">CAS</option>
+                                    <option value="5">CAS PAR CAS</option>
                                     <option value="6">CUSTOM</option>
                                 </select>
 
@@ -130,10 +158,12 @@ Form :: {{$form->title}}
                             </div>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12" id="c_option" style="display: none;">
                             <div class="form-group{{ $errors->has('option') ? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="input-name">{{ __('Option') }} <small><b>( JSON )</b></small></label>
-                                <textarea type="text" name="option" id="input-name" class="form-control form-control-alternative{{ $errors->has('option') ? ' is-invalid' : '' }}" value="{{ old('option')}}" autofocus></textarea>
+                                <br>
+                                <small>EX : [ {"value":"1"},{"value":"2"},{"value":"3"} ]</small>
+                                <textarea type="text" name="option" id="option" class="form-control form-control-alternative{{ $errors->has('option') ? ' is-invalid' : '' }}" value="{{ old('option')}}" autofocus></textarea>
 
                                 @if ($errors->has('option'))
                                     <span class="invalid-feedback" role="alert">
@@ -156,4 +186,21 @@ Form :: {{$form->title}}
         </div>
       </div>
 
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function(){
+            // Get Type Value
+            $('#type').on('change',function(){
+                if(this.value == 6){
+                    $('#c_option').css("display","block");
+                    $('#option').attr("required",true);
+                }else{
+                    $('#c_option').css("display","none");
+                    $('#option').attr("required",false);
+                }
+            });
+        });
+    </script>
 @endsection

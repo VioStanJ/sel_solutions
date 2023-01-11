@@ -48,8 +48,8 @@ Getion Utilisateur - {{$worker->user->firstname}} {{$worker->user->lastname}}
             <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
                 <div class="card card-profile shadow">
                     <div class="row justify-content-center">
-                        <div class="col-lg-3 order-lg-2">
-                            <div class="card-profile-image">
+                        <div class="col-lg-3 order-lg-2 mt-5">
+                            <div class="card-profile-image mt-5">
                                 <a href="#">
                                     <img src="{{$worker->photo}}" style="width: 350px; height: auto; border-radius:12px;">
                                 </a>
@@ -114,7 +114,7 @@ Getion Utilisateur - {{$worker->user->firstname}} {{$worker->user->lastname}}
                                     </a>
                                 </div>
 
-                                <div class="row justify-content-between align-items-center">
+                                <div class="row justify-content-between align-items-center pl-3">
                                     <a href="{{route('admin.workers.delete',$worker->id)}}" class="btn btn-danger">EFFACER</a>
                                 </div>
                             @endif
@@ -134,7 +134,7 @@ Getion Utilisateur - {{$worker->user->firstname}} {{$worker->user->lastname}}
 
                         <div class="card-plan">
 
-                            {{-- @if (empty($plan))
+                            @if (empty($plan))
                                 <h2>Pas de Plan !</h2>
                             @else
                                 <div class="flex align-items-center justify-content-center border mb-2 p-3">
@@ -142,18 +142,18 @@ Getion Utilisateur - {{$worker->user->firstname}} {{$worker->user->lastname}}
                                     <h2>$ {{$plan->plan->price}}</h2>
                                     <h4><i class="fas fa-calendar"></i> Date d'Expiration : {{$plan->expiration_date}}</h4>
                                 </div>
-                            @endif --}}
+                            @endif
                         </div>
 
                         <div class="d-flex justify-content-center mt-3">
-                            {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
 
                                 @if (empty($plan))
                                     Ajouter un Plan
                                 @else
                                    Changer de Plan
                                 @endif
-                              </button> --}}
+                              </button>
                         </div>
 
                         <form action="" method="post">
@@ -168,7 +168,7 @@ Getion Utilisateur - {{$worker->user->firstname}} {{$worker->user->lastname}}
 
         {{-- Modal Plan--}}
 
-        {{-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -200,7 +200,7 @@ Getion Utilisateur - {{$worker->user->firstname}} {{$worker->user->lastname}}
                 </div>
               </div>
             </div>
-          </div> --}}
+          </div>
 
         {{-- @include('layouts.footers.auth') --}}
     </div>

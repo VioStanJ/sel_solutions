@@ -17,7 +17,7 @@ class CreateQuestionHistoriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger("form_id");
             $table->string("title");
-            $table->integer("type"); // {text-data-number-yes_no-email-case_to_case-option}
+            $table->integer("type"); // {text-data-number-yes_no-email-case_to_case-custom}
             $table->string("option")->default("");
             $table->boolean("status")->default(true);
             $table->timestamps();

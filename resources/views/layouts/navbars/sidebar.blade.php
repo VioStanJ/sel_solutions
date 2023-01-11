@@ -107,7 +107,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.forms.index') }}">
-                        <i class="ni ni-single-copy-04 text-primary"></i> {{ __('PATIENT HISTORY') }}
+                        <i class="ni ni-single-copy-04 text-primary"></i> {{ __('PATIENT FORM') }}
                     </a>
                 </li>
                 {{-- <li class="nav-item">

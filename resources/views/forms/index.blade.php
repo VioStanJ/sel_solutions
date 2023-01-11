@@ -20,8 +20,8 @@ Questionnaire Patient
                 </nav>
             </div>
             <div class="col-lg-6 col-5 text-right">
-                <a href="{{route('admin.exams.create')}}" class="btn btn-lg btn-neutral">
-                    <i class="ni ni-fat-add"></i> New</a>
+                {{-- <a href="{{route('admin.exams.create')}}" class="btn btn-lg btn-neutral">
+                    <i class="ni ni-fat-add"></i> New</a> --}}
                 {{-- <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
             </div>
             </div>

@@ -33,6 +33,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
     Route::resource('exams', App\Http\Controllers\Admin\ExamController::class);
     Route::resource('forms', App\Http\Controllers\Admin\HistoryController::class);
     Route::post('forms/create/question', [App\Http\Controllers\Admin\HistoryController::class,'createQuestion'])->name('forms.createQuestion');
+    Route::get('forms/delete/question/{id}', [App\Http\Controllers\Admin\HistoryController::class,'delete'])->name('forms.question.delete');
 
     Route::get('/icons',function() { return view('icons'); })->name('icons');
     Route::get('/tables',function() { return view('tables'); })->name('tables');

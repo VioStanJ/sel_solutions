@@ -94,7 +94,7 @@ Form :: {{$form->title}}
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="{{route('admin.forms.show',$item->id)}}">Details</a>
+                                            <a class="dropdown-item" href="{{route('admin.forms.question.delete',$item->id)}}">Delete</a>
                                         </div>
                                     </div>
                                 </td>

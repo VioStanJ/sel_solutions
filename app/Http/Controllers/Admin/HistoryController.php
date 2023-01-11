@@ -36,9 +36,15 @@ class HistoryController extends Controller
         # code...
     }
 
-    public function delete()
+    public function destroy($id)
     {
-        # code...
+
+    }
+
+    public function delete($id)
+    {
+        QuestionHistory::where('id','=',$id)->update(['status'=>0]);
+        return redirect()->back();
     }
 
     public function createQuestion(Request $request)

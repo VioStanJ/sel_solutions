@@ -16,8 +16,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(RoleS::class);
         // $this->call(PlanS::class);
         // $this->call(UserS::class);
-        $this->call(DepartementSeed::class);
-        $this->call(ArrondissementSeed::class);
-        $this->call(CommuneSeed::class);
+        // $this->call(DepartementSeed::class);
+        // $this->call(ArrondissementSeed::class);
+        // $this->call(CommuneSeed::class);
+        $this->call(PatientHistoryS::class);
     }
 }

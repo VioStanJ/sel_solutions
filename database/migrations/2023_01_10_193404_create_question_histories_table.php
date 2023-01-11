@@ -15,7 +15,7 @@ class CreateQuestionHistoriesTable extends Migration
     {
         Schema::create('question_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("history_id");
+            $table->unsignedBigInteger("form_id");
             $table->string("title");
             $table->integer("type"); // {text-data-number-yes_no-email-case_to_case-option}
             $table->string("option")->default("");

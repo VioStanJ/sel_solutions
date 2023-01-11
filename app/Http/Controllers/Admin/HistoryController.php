@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PatientForm;
-use App\Models\PatientHistory;
 use App\Models\QuestionHistory;
 
 class HistoryController extends Controller

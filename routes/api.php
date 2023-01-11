@@ -32,4 +32,7 @@ Route::group(['middleware'=>'auth:api'],function () {
     Route::get('/exam/get',[App\Http\Controllers\Api\ExamController::class,'get']);
     Route::post('/exam/submit',[App\Http\Controllers\Api\ExamController::class,'save']);
     Route::get('/exam/customer/consultation',[App\Http\Controllers\Api\ExamController::class,'getConsults']);
+
+    Route::get('/forms',[App\Http\Controllers\Api\FormController::class,'index']);
+
 });
